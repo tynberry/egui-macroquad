@@ -19,8 +19,8 @@ include = [
 
 [dependencies]
 egui = "0.22.0"
-egui-miniquad = { git = "https://github.com/not-fl3/egui-miniquad.git", branch = "miniquad_0.4" }
-macroquad = { git = "https://github.com/Bytekeeper/macroquad.git", default-features=false }
+egui-miniquad = { git = "https://github.com/tynberry/egui-miniquad.git", branch = "miniquad_0.4" }
+macroquad = "0.4.4"
 
 [features]
 default = ["audio"]
