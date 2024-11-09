@@ -15,7 +15,7 @@ include = ["LICENSE-APACHE", "LICENSE-MIT", "**/*.rs", "Cargo.toml"]
 [dependencies]
 egui = "0.28.1"
 egui-miniquad = { git = "https://github.com/tynberry/egui-miniquad", branch = "miniquad_0.4" }
-macroquad = "0.4.12"
+macroquad = "0.4.13"
 
 [features]
 default = ["audio"]
