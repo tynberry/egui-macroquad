@@ -14,7 +14,7 @@ include = ["LICENSE-APACHE", "LICENSE-MIT", "**/*.rs", "Cargo.toml"]
 
 [dependencies]
 egui = "0.30.0"
-egui-miniquad = { git = "https://github.com/tynberry/egui-miniquad", branch = "master" }
+egui-miniquad = { git = "https://github.com/tynberry/egui-miniquad", branch = "miniquad_0.4" }
 macroquad = "0.4.13"
 
 [features]
