@@ -74,7 +74,7 @@ impl Egui {
         )
     }
 
-    fn ui<F: FnOnce(&mut dyn mq::RenderingBackend, &egui::Context)>(&mut self, f: F) {
+    fn ui<F: FnMut(&mut (dyn mq::RenderingBackend + 'static), &egui::Context)>(&mut self, f: F) {
         let gl = unsafe { get_internal_gl() };
         macroquad::input::utils::repeat_all_miniquad_input(self, self.1);
 
@@ -90,7 +90,7 @@ impl Egui {
 }
 
 /// Calculates egui ui. Must be called once per frame.
-pub fn ui<F: FnOnce(&egui::Context)>(f: F) {
+pub fn ui<F: FnMut(&egui::Context)>(mut f: F) {
     get_egui().ui(|_, ctx| f(ctx))
 }
 
@@ -118,11 +118,13 @@ impl mq::EventHandler for Egui {
     }
 
     fn mouse_button_down_event(&mut self, mb: mq::MouseButton, x: f32, y: f32) {
-        self.0.mouse_button_down_event(mb, x, y);
+        let gl = unsafe { get_internal_gl() };
+        self.0.mouse_button_down_event(gl.quad_context, mb, x, y);
     }
 
     fn mouse_button_up_event(&mut self, mb: mq::MouseButton, x: f32, y: f32) {
-        self.0.mouse_button_up_event(mb, x, y);
+        let gl = unsafe { get_internal_gl() };
+        self.0.mouse_button_up_event(gl.quad_context, mb, x, y);
     }
 
     fn char_event(&mut self, character: char, _keymods: mq::KeyMods, _repeat: bool) {
@@ -130,7 +132,8 @@ impl mq::EventHandler for Egui {
     }
 
     fn key_down_event(&mut self, keycode: mq::KeyCode, keymods: mq::KeyMods, _repeat: bool) {
-        self.0.key_down_event(keycode, keymods);
+        let gl = unsafe { get_internal_gl() };
+        self.0.key_down_event(gl.quad_context, keycode, keymods);
     }
 
     fn key_up_event(&mut self, keycode: mq::KeyCode, keymods: mq::KeyMods) {
