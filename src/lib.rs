@@ -74,7 +74,7 @@ impl Egui {
         )
     }
 
-    fn ui<F: FnOnce(&mut dyn mq::RenderingBackend, &egui::Context)>(&mut self, f: F) {
+    fn ui<F: FnMut(&mut (dyn mq::RenderingBackend), &egui::Context)>(&mut self, f: F) {
         let gl = unsafe { get_internal_gl() };
         macroquad::input::utils::repeat_all_miniquad_input(self, self.1);
 
@@ -90,7 +90,7 @@ impl Egui {
 }
 
 /// Calculates egui ui. Must be called once per frame.
-pub fn ui<F: FnOnce(&egui::Context)>(f: F) {
+pub fn ui<F: FnMut(&egui::Context)>(mut f: F) {
     get_egui().ui(|_, ctx| f(ctx))
 }
 
