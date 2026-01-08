@@ -13,16 +13,16 @@ keywords = ["gui", "imgui", "immediate", "portable", "gamedev"]
 include = ["LICENSE-APACHE", "LICENSE-MIT", "**/*.rs", "Cargo.toml"]
 
 [dependencies]
-egui-miniquad = { git = "https://github.com/tynberry/egui-miniquad", tag = "0.4.8" }
-egui = "0.31.1"
-macroquad = "0.4.13"
+egui-miniquad = { git = "https://github.com/tynberry/egui-miniquad", tag = "0.4.8_0.33.3" }
+egui = "0.33.3"
+macroquad = "0.4.14"
 
 [features]
 default = ["audio"]
 audio = ["macroquad/audio"]
 
 [dev-dependencies]
-egui_demo_lib = "0.31.1"
+egui_demo_lib = "0.33.3"
 
 [profile.release]
 opt-level = 2

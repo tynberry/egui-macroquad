@@ -74,7 +74,7 @@ impl Egui {
         )
     }
 
-    fn ui<F: FnMut(&mut (dyn mq::RenderingBackend), &egui::Context)>(&mut self, f: F) {
+    fn ui<F: FnMut(&mut dyn mq::RenderingBackend, &egui::Context)>(&mut self, f: F) {
         let gl = unsafe { get_internal_gl() };
         macroquad::input::utils::repeat_all_miniquad_input(self, self.1);
 
